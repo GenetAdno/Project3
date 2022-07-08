@@ -97,7 +97,7 @@ jobs:
               npm audit --audit-level=critical 
       - slack/notify:
           event: fail
-          mentions: '@DevloperTeam'
+          mentions: '@GenetsTeam'
           template: basic_fail_1
       - slack/notify:
           event: pass
