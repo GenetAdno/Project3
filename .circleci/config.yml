@@ -95,28 +95,13 @@ jobs:
               npm audit fix --audit-level=critical --force
               npm audit fix --audit-level=critical --force
               npm audit --audit-level=critical 
-
-  notify:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
       - slack/notify:
-          custom: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "plain_text",
-                      "text": "*This is a text notification*",
-                      "emoji": true
-                    }
-                  ]
-                }
-              ]
-            }
-          event: always
+          event: fail
+          mentions: '@GenetsTeam'
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1        
 
 
 workflows:
@@ -132,5 +117,5 @@ workflows:
           requires: [build-backend]
       - scan-frontend:
           requires: [build-frontend]    
-      - notify
+      
            
