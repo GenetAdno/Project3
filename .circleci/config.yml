@@ -92,16 +92,17 @@ jobs:
           command: |      
               cd backend
               npm install
-              npm audit fix --audit-level=critical --force
-              npm audit fix --audit-level=critical --force
-              npm audit --audit-level=critical
-       - slack/notify:
+              npm audit fix --force
+              npm audit --audit-level=critical 
+      - slack/notify:
           event: fail
           mentions: '@DevloperTeam'
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1         
+          template: success_tagged_deploy_1        
+
+
 workflows:
   default:
     jobs:
@@ -115,3 +116,5 @@ workflows:
           requires: [build-backend]
       - scan-frontend:
           requires: [build-frontend]    
+      
+           
