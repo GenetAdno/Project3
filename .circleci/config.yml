@@ -126,14 +126,7 @@ jobs:
               npm install
               npm audit fix --audit-level=critical --force
               npm audit fix --audit-level=critical --force
-              npm audit --audit-level=critical 
-      - slack/notify:
-          event: fail
-          mentions: '@GenetTeam'
-          template: basic_fail_1
-      - slack/notify:
-          event: pass
-          template: success_tagged_deploy_1  
+              npm audit --audit-level=critical  
   deploy-infrastructure:
     docker:
       - image: amazon/aws-cli
@@ -273,6 +266,13 @@ jobs:
             echo "Contents  of the inventory.txt file is -------"
             cat  ~/inventory.txt
             ansible-playbook -i ~/inventory.txt deploy-backend.yml
+     - slack/notify:
+          event: fail
+          mentions: '@GenetTeam'
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1        
       - destroy-environment
       - revert_migrations   
   smoke-test:
