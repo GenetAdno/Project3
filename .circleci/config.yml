@@ -272,8 +272,6 @@ jobs:
             ansible-playbook -i ~/inventory.txt deploy-backend.yml
       - destroy-environment
       - revert_migrations   
-​            
-  
 workflows:
   default:
     jobs:
