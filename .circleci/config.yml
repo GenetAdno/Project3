@@ -188,7 +188,7 @@ jobs:
       - destroy_environment
   configure-infrastructure:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: Python 3.10.5-alpine3.11
     steps:
       - checkout
       - add_ssh_keys:
