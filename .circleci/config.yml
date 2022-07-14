@@ -296,7 +296,7 @@ jobs:
       - run: sudo apt upgrade -y
       - run:
           name: Install dependencies
-          command: sudo apt install awscli -y 
+          command: apk add --update --no-cache tar gzip ansible aws-cli openssh curl nodejs npm
       - run:
           name: Backend smoke test.
           command: |
