@@ -290,7 +290,7 @@ jobs:
       - run: sudo apt upgrade -y
       - run:
           name: Install dependencies
-          command: sudo apt --update --no-cache tar gzip ansible aws-cli openssh curl nodejs npm
+          command: sudo apt install awscli -y 
       - run:
           name: Backend smoke test.
           command: |
