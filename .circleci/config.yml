@@ -481,7 +481,7 @@ jobs:
       # Checkout code from git
       - checkout
       - run:
-          name: Get old stack workflow id
+          name: Fetch old stack workflow id
           command: |
             # your code here
             # Fetch the Old workflow ID
@@ -558,5 +558,5 @@ workflows:
           requires: [smoke-test]
       - cleanup:
           requires: [cloudfront-update]
-      - configure-monitoring:
-          requires: [smoke-test]
+     # - configure-monitoring:
+          #requires: [smoke-test]
