@@ -501,30 +501,7 @@ jobs:
               aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
               aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
             fi
-  configure-monitoring:
-    docker:
-     
-      - image: python:3.10-alpine3.16
-    steps:
-      - checkout
-      - add_ssh_keys:
-          fingerprint: ["37:49:83:3a:95:f3:ff:9e:ba:81:72:88:35:9e:da:a9"]
-      - run:
-          name: Install dependencies
-          command: |
-            # your code here
-            apk add --update --no-cache tar gzip ansible aws-cli openssh
-      - attach_workspace:
-          at: ~/
-      - run:
-          name: Configure monitoring
-          command: |
-            cd .circleci/ansible
-            ansible-playbook -i inventory.txt configure-monitoring.yml
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - project/.circleci/ansible/inventory.txt
+ 
 
 workflows:
   default:
@@ -558,5 +535,4 @@ workflows:
            requires: [smoke-test]
       - cleanup:
           requires: [cloudfront-update]
-     # - configure-monitoring:
-          #requires: [smoke-test]
+    
