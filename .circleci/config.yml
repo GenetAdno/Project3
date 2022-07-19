@@ -219,7 +219,7 @@ jobs:
       - checkout
       # Add ssh keys with fingerprint
       - add_ssh_keys:
-          fingerprint: [37:49:83:3a:95:f3:ff:9e:ba:81:72:88:35:9e:da:a9"]
+          fingerprint: [41:c6:ce:d4:61:c9:0b:7b:89:ed:5d:77:b5:0a:e6:05"]
       # attach workspace
       - run:
           name: Install dependencies
@@ -326,7 +326,7 @@ jobs:
       - checkout
       # Add ssh keys with fingerprint
       - add_ssh_keys:
-          fingerprint: ["37:49:83:3a:95:f3:ff:9e:ba:81:72:88:35:9e:da:a9"]
+          fingerprint: ["41:c6:ce:d4:61:c9:0b:7b:89:ed:5d:77:b5:0a:e6:05"]
       - restore_cache:
           keys: [backend-build]
       - run:
@@ -533,6 +533,6 @@ workflows:
           requires: [deploy-backend, deploy-frontend]
       - cloudfront-update:
            requires: [smoke-test]
-      #- cleanup:
-        #  requires: [cloudfront-update]
+      - cleanup:
+          requires: [cloudfront-update]
     
