@@ -263,17 +263,20 @@ jobs:
       - run:
           name: Send migration results to memstash or kvdb
           command: |
-            if grep -q "migrations" ~/project/backend/migrations_dump.txt
+            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
               # If you are using memstash.io, generate the token "7933fe63-4687-4fa1-8426-aa25aa1730ec" on the website
               curl https://kvdb.io/16W1CczDRxTXmQy9so4y5g/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+            else
+              curl https://kvdb.io/16W1CczDRxTXmQy9so4y5g/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '0'
+               return 1 
             fi
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
         # Here's where you will add some code to rollback on failure
-      - destroy-environment:
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+      # - destroy-environment:
+      #     workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
 
   deploy-frontend:
     docker:
@@ -432,10 +435,10 @@ jobs:
               return 1
             fi
       # Here's where you will add some code to rollback on failure
-      - destroy-environment:
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
-      - revert-migrations:
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+      # - destroy-environment:
+      #     workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+      # - revert-migrations:
+      #     workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
 
   cloudfront-update:
     docker:
