@@ -162,13 +162,13 @@ jobs:
             npm install --save-dev webpack@5.73.0
             npm audit fix --audit-level=critical --force
             npm audit fix --force
-      - slack/notify:
-          event: fail
-          mentions: '@DevloperTeam'
-          template: basic_fail_1
-      - slack/notify:
-          event: pass
-          template: success_tagged_deploy_1        
+      # - slack/notify:
+      #     event: fail
+      #     mentions: '@DevloperTeam'
+      #     template: basic_fail_1
+      # - slack/notify:
+      #     event: pass
+      #     template: success_tagged_deploy_1        
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
@@ -542,6 +542,6 @@ workflows:
           requires: [deploy-backend, deploy-frontend]
       - cloudfront-update:
           requires: [smoke-test]
-      - cleanup:
-          requires: [cloudfront-update]
+      # - cleanup:
+      #     requires: [cloudfront-update]
     
