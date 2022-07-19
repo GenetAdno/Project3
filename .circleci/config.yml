@@ -275,8 +275,8 @@ jobs:
           paths: [frontend/node_modules]
           key: frontend-build
         # Here's where you will add some code to rollback on failure
-      # - destroy-environment:
-      #     workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+      - destroy-environment:
+          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
 
   deploy-frontend:
     docker:
@@ -435,10 +435,10 @@ jobs:
               return 1
             fi
       # Here's where you will add some code to rollback on failure
-      # - destroy-environment:
-      #     workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
-      # - revert-migrations:
-      #     workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+      - destroy-environment:
+          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
+      - revert-migrations:
+          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
 
   cloudfront-update:
     docker:
@@ -464,7 +464,7 @@ jobs:
              # Change the initial stack name, as applicable to you
              aws cloudformation deploy \
              --template-file .circleci/files/cloudfront.yml \
-             --stack-name InitialStack-5afc0aa \
+             --stack-name InitialStack \
              --parameter-overrides WorkflowID=${CIRCLE_WORKFLOW_ID:0:7} \
              --tags project=udapeople
              echo OldWorkflowID=${OldWorkflowID}
