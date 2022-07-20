@@ -76,13 +76,13 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
-      - slack/notify:
-          event: fail
-          mentions: '@GenetTeam'
-          template: basic_fail_1
-      - slack/notify:
-          event: pass
-          template: success_tagged_deploy_1    
+      # - slack/notify:
+      #     event: fail
+      #     mentions: '@GenetTeam'
+      #     template: basic_fail_1
+      # - slack/notify:
+      #     event: pass
+      #     template: success_tagged_deploy_1    
   test-frontend:
     docker:
       # Docker image here
